@@ -114,14 +114,6 @@ int main(int argc, char **argv)
 		return 0;
 	}
 
-	/* create file */
-	FILE *fp = fopen(fpath, "w");
-	if (fp == NULL) {
-		printf("%s open error\n", fpath);
-		exit(-1);
-	}
-	fclose(fp);
-
 	struct pairs dict[DICT_LEN];
 	char *dig_str;
 	char *leet_str;
@@ -152,6 +144,14 @@ int main(int argc, char **argv)
 		free(add_one_str);
 		free(dig_str);
 	}
+
+	/* create file */
+	FILE *fp = fopen(fpath, "w");
+	if (fp == NULL) {
+		printf("%s open error\n", fpath);
+		exit(-1);
+	}
+	fclose(fp);
 
 	return 0;
 }
