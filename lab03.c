@@ -7,10 +7,11 @@
 #include "sha256.h"
 
 #define DIG_BIN_LEN 32
-#define DIG_STR_LEN ((DIG_BIN_LEN * 2) + 1)
+#define DIG_STR_LEN ((DIG_BIN_LEN * 2))
 
 /* define the length of passwords dictionary */
 #define DICT_LEN (sizeof(passwords) / sizeof(passwords[0]))
+#define PASSWD_MAX_LEN 64
 
 void sha256(char *dest, char *src)
 {
@@ -92,6 +93,17 @@ char *add_one(char *str)
 	return res;
 }
 
+struct pairs {
+	char passwd[PASSWD_MAX_LEN + 1];
+	char passwd_dig[DIG_STR_LEN + 1];
+
+	char leet_passwd[PASSWD_MAX_LEN + 1];
+	char leet_passwd_dig[DIG_STR_LEN + 1];
+
+	char add_one_passwd[PASSWD_MAX_LEN + 2];
+	char add_one_passwd_dig[DIG_STR_LEN + 2];
+};
+
 int main(int argc, char **argv)
 {
 	char *fpath = "dict.txt";
@@ -109,6 +121,31 @@ int main(int argc, char **argv)
 		exit(-1);
 	}
 	fclose(fp);
+
+	struct pairs dict[DICT_LEN];
+	char *dig_str;
+	char *leet_str;
+	char *add_one_str;
+	for(int i = 0; i < DICT_LEN; i++) {
+		dig_str = dig(passwords[i]);
+		strncpy(dict[i].passwd, passwords[i], PASSWD_MAX_LEN);
+		strncpy(dict[i].passwd_dig, dig_str, DIG_STR_LEN);
+		free(dig_str);
+
+		leet_str = leet(passwords[i]);
+		dig_str = dig(leet_str);
+		strncpy(dict[i].leet_passwd, leet_str, PASSWD_MAX_LEN);
+		strncpy(dict[i].leet_passwd_dig, dig_str, DIG_STR_LEN);
+		free(leet_str);
+		free(dig_str);
+
+		add_one_str = add_one(passwords[i]);
+		dig_str = dig(add_one_str);
+		strncpy(dict[i].add_one_passwd, add_one_str, PASSWD_MAX_LEN + 1);
+		strncpy(dict[i].add_one_passwd_dig, dig_str, DIG_STR_LEN);
+		free(add_one_str);
+		free(dig_str);
+	}
 
 	return 0;
 }
