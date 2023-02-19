@@ -128,12 +128,16 @@ int main(int argc, char **argv)
 	char *add_one_str;
 	for(int i = 0; i < DICT_LEN; i++) {
 		dig_str = dig(passwords[i]);
+		memset(dict[i].passwd, 0, PASSWD_MAX_LEN + 1);
+		memset(dict[i].passwd_dig, 0, DIG_STR_LEN + 1);
 		strncpy(dict[i].passwd, passwords[i], PASSWD_MAX_LEN);
 		strncpy(dict[i].passwd_dig, dig_str, DIG_STR_LEN);
 		free(dig_str);
 
 		leet_str = leet(passwords[i]);
 		dig_str = dig(leet_str);
+		memset(dict[i].leet_passwd, 0, PASSWD_MAX_LEN + 1);
+		memset(dict[i].leet_passwd_dig, 0, DIG_STR_LEN + 1);
 		strncpy(dict[i].leet_passwd, leet_str, PASSWD_MAX_LEN);
 		strncpy(dict[i].leet_passwd_dig, dig_str, DIG_STR_LEN);
 		free(leet_str);
@@ -141,6 +145,8 @@ int main(int argc, char **argv)
 
 		add_one_str = add_one(passwords[i]);
 		dig_str = dig(add_one_str);
+		memset(dict[i].add_one_passwd, 0, PASSWD_MAX_LEN + 2);
+		memset(dict[i].add_one_passwd_dig, 0, DIG_STR_LEN + 1);
 		strncpy(dict[i].add_one_passwd, add_one_str, PASSWD_MAX_LEN + 1);
 		strncpy(dict[i].add_one_passwd_dig, dig_str, DIG_STR_LEN);
 		free(add_one_str);
