@@ -109,7 +109,7 @@ int main(int argc, char **argv)
 	char *fpath = "dict.txt";
 
 	/* check if file exists */
-	if (!access(fpath, F_OK)) {
+	if (!access(fpath, F_OK) && argc == 1) {
 		printf("dictionary exists\n");
 		return 0;
 	}
