@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #include "passwords.h"
 #include "sha256.h"
@@ -93,13 +94,12 @@ char *add_one(char *str)
 
 int main(int argc, char **argv)
 {
-	FILE *pf;
-	if((pf = fopen("dict.txt", "r")) != NULL) {
-		printf("hello world!\n");
+	char *fpath = "dict.txt";
+
+	/* check if file exists */
+	if (!access(fpath, F_OK)) {
+		printf("dictionary exists\n");
 		return 0;
-	} else {
-		printf("file not found!\n");
-		exit(0);
 	}
 	return 0;
 }
