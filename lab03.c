@@ -101,5 +101,14 @@ int main(int argc, char **argv)
 		printf("dictionary exists\n");
 		return 0;
 	}
+
+	/* create file */
+	FILE *fp = fopen(fpath, "w");
+	if (fp == NULL) {
+		printf("%s open error\n", fpath);
+		exit(-1);
+	}
+	fclose(fp);
+
 	return 0;
 }
