@@ -111,12 +111,12 @@ int main(int argc, char **argv)
 		exit(-1);
 	}
 
+	char *fpath = "dict.txt";
+
 	if (argc == 1)
 		goto fcheck;
 
 fcheck:
-	char *fpath = "dict.txt";
-
 	/* check if file exists */
 	if (!access(fpath, F_OK) && argc == 1) {
 		printf("dictionary exists\n");
