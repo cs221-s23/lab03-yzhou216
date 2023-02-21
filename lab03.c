@@ -127,7 +127,7 @@ fcheck:
 	char *dig_str;
 	char *leet_str;
 	char *add_one_str;
-	for(int i = 0; i < DICT_LEN; i++) {
+	for (int i = 0; i < DICT_LEN; i++) {
 		dig_str = dig(passwords[i]);
 		memset(dict[i].passwd, 0, PASSWD_MAX_LEN + 1);
 		memset(dict[i].passwd_dig, 0, DIG_STR_LEN + 1);
