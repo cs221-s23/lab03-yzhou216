@@ -106,6 +106,15 @@ struct pairs {
 
 int main(int argc, char **argv)
 {
+	if (argc != 1 && argc != 2) {
+		printf("invalid arguments\n");
+		exit(-1);
+	}
+
+	if (argc == 1)
+		goto fcheck;
+
+fcheck:
 	char *fpath = "dict.txt";
 
 	/* check if file exists */
@@ -158,5 +167,6 @@ int main(int argc, char **argv)
 	}
 	fclose(fp);
 
+	printf("dictionary built\n");
 	return 0;
 }
