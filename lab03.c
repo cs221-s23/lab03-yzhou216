@@ -151,6 +151,11 @@ int main(int argc, char **argv)
 		printf("%s open error\n", fpath);
 		exit(-1);
 	}
+
+	/* write to file */
+	for (int i = 0; i < DICT_LEN; i++) {
+		fwrite(&dict[i], sizeof(dict[0]), 1, fp);
+	}
 	fclose(fp);
 
 	return 0;
