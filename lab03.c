@@ -156,33 +156,33 @@ fcheck:
 		return 0;
 	}
 
-	struct pairs dict[DICT_LEN];
+	struct pairs w_dict[DICT_LEN];
 	char *dig_str;
 	char *leet_str;
 	char *add_one_str;
 	for (int i = 0; i < DICT_LEN; i++) {
 		dig_str = dig(passwords[i]);
-		memset(dict[i].passwd, 0, PASSWD_MAX_LEN + 1);
-		memset(dict[i].passwd_dig, 0, DIG_STR_LEN + 1);
-		strncpy(dict[i].passwd, passwords[i], PASSWD_MAX_LEN);
-		strncpy(dict[i].passwd_dig, dig_str, DIG_STR_LEN);
+		memset(w_dict[i].passwd, 0, PASSWD_MAX_LEN + 1);
+		memset(w_dict[i].passwd_dig, 0, DIG_STR_LEN + 1);
+		strncpy(w_dict[i].passwd, passwords[i], PASSWD_MAX_LEN);
+		strncpy(w_dict[i].passwd_dig, dig_str, DIG_STR_LEN);
 		free(dig_str);
 
 		leet_str = leet(passwords[i]);
 		dig_str = dig(leet_str);
-		memset(dict[i].leet_passwd, 0, PASSWD_MAX_LEN + 1);
-		memset(dict[i].leet_passwd_dig, 0, DIG_STR_LEN + 1);
-		strncpy(dict[i].leet_passwd, leet_str, PASSWD_MAX_LEN);
-		strncpy(dict[i].leet_passwd_dig, dig_str, DIG_STR_LEN);
+		memset(w_dict[i].leet_passwd, 0, PASSWD_MAX_LEN + 1);
+		memset(w_dict[i].leet_passwd_dig, 0, DIG_STR_LEN + 1);
+		strncpy(w_dict[i].leet_passwd, leet_str, PASSWD_MAX_LEN);
+		strncpy(w_dict[i].leet_passwd_dig, dig_str, DIG_STR_LEN);
 		free(leet_str);
 		free(dig_str);
 
 		add_one_str = add_one(passwords[i]);
 		dig_str = dig(add_one_str);
-		memset(dict[i].add_one_passwd, 0, PASSWD_MAX_LEN + 2);
-		memset(dict[i].add_one_passwd_dig, 0, DIG_STR_LEN + 1);
-		strncpy(dict[i].add_one_passwd, add_one_str, PASSWD_MAX_LEN + 1);
-		strncpy(dict[i].add_one_passwd_dig, dig_str, DIG_STR_LEN);
+		memset(w_dict[i].add_one_passwd, 0, PASSWD_MAX_LEN + 2);
+		memset(w_dict[i].add_one_passwd_dig, 0, DIG_STR_LEN + 1);
+		strncpy(w_dict[i].add_one_passwd, add_one_str, PASSWD_MAX_LEN + 1);
+		strncpy(w_dict[i].add_one_passwd_dig, dig_str, DIG_STR_LEN);
 		free(add_one_str);
 		free(dig_str);
 	}
@@ -196,7 +196,7 @@ fcheck:
 
 	/* write to file */
 	for (int i = 0; i < DICT_LEN; i++) {
-		fwrite(&dict[i], sizeof(dict[0]), 1, fp);
+		fwrite(&w_dict[i], sizeof(w_dict[0]), 1, fp);
 	}
 	fclose(fp);
 
