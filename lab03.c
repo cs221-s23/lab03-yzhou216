@@ -112,21 +112,22 @@ int main(int argc, char **argv)
 	}
 
 	char *fpath = "dict.txt";
+	FILE *fp;
 
 	if (argc == 1)
 		goto fcheck;
 
 	struct pairs r_dict[DICT_LEN];
 
-	FILE *dict_fp = fopen(fpath, "r");
-	if (dict_fp == NULL) {
+	fp = fopen(fpath, "r");
+	if (fp == NULL) {
 		printf("%s open error\n", fpath);
 		exit(-1);
 	}
 
 	int rs = 1;
 	for (int i = 0; i <= DICT_LEN; i++) {
-		rs = fread(&r_dict[i], sizeof(pairs), 1, dict_fp);
+		rs = fread(&r_dict[i], sizeof(pairs), 1, fp);
 
 		if (!strcmp(r_dict[i].passwd_dig, argv[1])) {
 			printf("%s\n", r_dict[i].passwd);
@@ -143,7 +144,7 @@ int main(int argc, char **argv)
 			return 0;
 		}
 	}
-	fclose(dict_fp);
+	fclose(fp);
 
 	printf("not found\n");
 	return 0;
@@ -187,7 +188,7 @@ fcheck:
 	}
 
 	/* create file */
-	FILE *fp = fopen(fpath, "w");
+	fp = fopen(fpath, "w");
 	if (fp == NULL) {
 		printf("%s open error\n", fpath);
 		exit(-1);
