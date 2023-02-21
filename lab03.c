@@ -123,6 +123,7 @@ int main(int argc, char **argv)
 		exit(-1);
 	}
 
+	/* create dictionary struct array to be read */
 	struct pairs r_dict[DICT_LEN];
 	int rs = 1;
 	for (int i = 0; i <= DICT_LEN; i++) {
@@ -155,6 +156,7 @@ fcheck:
 		return 0;
 	}
 
+	/* create dictionary struct array to be written */
 	struct pairs w_dict[DICT_LEN];
 	char *dig_str;
 	char *leet_str;
