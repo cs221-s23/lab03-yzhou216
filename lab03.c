@@ -102,7 +102,7 @@ struct pairs {
 
 	char add_one_passwd[PASSWD_MAX_LEN + 2];
 	char add_one_passwd_dig[DIG_STR_LEN + 2];
-};
+} pairs;
 
 int main(int argc, char **argv)
 {
@@ -115,6 +115,37 @@ int main(int argc, char **argv)
 
 	if (argc == 1)
 		goto fcheck;
+
+	struct pairs r_dict[DICT_LEN];
+
+	FILE *dict_fp = fopen(fpath, "r");
+	if (dict_fp == NULL) {
+		printf("%s open error\n", fpath);
+		exit(-1);
+	}
+
+	int rs = 1;
+	for (int i = 0; i <= DICT_LEN; i++) {
+		rs = fread(&r_dict[i], sizeof(pairs), 1, dict_fp);
+
+		if (!strcmp(r_dict[i].passwd_dig, argv[1])) {
+			printf("%s\n", r_dict[i].passwd);
+			return 0;
+		}
+
+		if (!strcmp(r_dict[i].leet_passwd_dig, argv[1])) {
+			printf("%s\n", r_dict[i].leet_passwd);
+			return 0;
+		}
+
+		if (!strcmp(r_dict[i].add_one_passwd_dig, argv[1])) {
+			printf("%s\n", r_dict[i].add_one_passwd);
+			return 0;
+		}
+	}
+
+	printf("not found\n");
+	return 0;
 
 fcheck:
 	/* check if file exists */
