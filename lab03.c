@@ -134,9 +134,8 @@ int main(int argc, char **argv)
 
 	/* create dictionary struct array to be read */
 	struct pairs r_dict[DICT_LEN];
-	int rs = 1;
 	for (int i = 0; i <= DICT_LEN; i++) {
-		rs = fread(&r_dict[i], sizeof(r_dict), 1, fp);
+		fread(&r_dict[i], sizeof(r_dict), 1, fp);
 
 		if (!strcmp(r_dict[i].passwd_dig, argv[1])) {
 			printf("%s\n", r_dict[i].passwd);
