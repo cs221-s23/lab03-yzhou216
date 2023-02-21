@@ -104,6 +104,15 @@ struct pairs {
 	char add_one_passwd_dig[DIG_STR_LEN + 2];
 };
 
+void write_dict_csv(struct pairs *dict, FILE *fp, int size) {
+	for (int i = 0; i < size; i++) {
+		fprintf(fp, "%s,%s\n%s,%s\n%s,%s\n",
+			    dict[i].passwd, dict[i].passwd_dig,
+			    dict[i].leet_passwd, dict[i].leet_passwd_dig,
+			    dict[i].add_one_passwd, dict[i].add_one_passwd_dig);
+	}
+}
+
 int main(int argc, char **argv)
 {
 	if (argc != 1 && argc != 2) {
@@ -201,6 +210,10 @@ fcheck:
 	for (int i = 0; i < DICT_LEN; i++) {
 		fwrite(&w_dict[i], sizeof(w_dict[0]), 1, fp);
 	}
+
+	/* write human readable csv dictionary */
+	fp = fopen("dict.csv", "w");
+	write_dict_csv(w_dict, fp, DICT_LEN);
 	fclose(fp);
 
 	printf("dictionary built\n");
