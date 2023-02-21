@@ -211,7 +211,7 @@ fcheck:
 		fwrite(&w_dict[i], sizeof(w_dict[0]), 1, fp);
 	}
 
-	/* write human readable csv dictionary */
+	/* write human-readable csv dictionary */
 	fp = fopen("dict.csv", "w");
 	write_dict_csv(w_dict, fp, DICT_LEN);
 	fclose(fp);
