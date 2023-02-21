@@ -143,6 +143,7 @@ int main(int argc, char **argv)
 			return 0;
 		}
 	}
+	fclose(dict_fp);
 
 	printf("not found\n");
 	return 0;
