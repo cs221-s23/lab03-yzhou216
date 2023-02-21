@@ -117,14 +117,13 @@ int main(int argc, char **argv)
 	if (argc == 1)
 		goto fcheck;
 
-	struct pairs r_dict[DICT_LEN];
-
 	fp = fopen(fpath, "r");
 	if (fp == NULL) {
 		printf("dictionary not found\n", fpath);
 		exit(-1);
 	}
 
+	struct pairs r_dict[DICT_LEN];
 	int rs = 1;
 	for (int i = 0; i <= DICT_LEN; i++) {
 		rs = fread(&r_dict[i], sizeof(pairs), 1, fp);
@@ -181,7 +180,9 @@ fcheck:
 		dig_str = dig(add_one_str);
 		memset(w_dict[i].add_one_passwd, 0, PASSWD_MAX_LEN + 2);
 		memset(w_dict[i].add_one_passwd_dig, 0, DIG_STR_LEN + 1);
-		strncpy(w_dict[i].add_one_passwd, add_one_str, PASSWD_MAX_LEN + 1);
+		strncpy(w_dict[i].add_one_passwd,
+			add_one_str,
+			PASSWD_MAX_LEN + 1);
 		strncpy(w_dict[i].add_one_passwd_dig, dig_str, DIG_STR_LEN);
 		free(add_one_str);
 		free(dig_str);
@@ -194,7 +195,7 @@ fcheck:
 		exit(-1);
 	}
 
-	/* write to file */
+	/* write struct to file */
 	for (int i = 0; i < DICT_LEN; i++) {
 		fwrite(&w_dict[i], sizeof(w_dict[0]), 1, fp);
 	}
