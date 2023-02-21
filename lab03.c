@@ -102,7 +102,7 @@ struct pairs {
 
 	char add_one_passwd[PASSWD_MAX_LEN + 2];
 	char add_one_passwd_dig[DIG_STR_LEN + 2];
-} pairs;
+};
 
 int main(int argc, char **argv)
 {
@@ -127,7 +127,7 @@ int main(int argc, char **argv)
 	struct pairs r_dict[DICT_LEN];
 	int rs = 1;
 	for (int i = 0; i <= DICT_LEN; i++) {
-		rs = fread(&r_dict[i], sizeof(pairs), 1, fp);
+		rs = fread(&r_dict[i], sizeof(r_dict), 1, fp);
 
 		if (!strcmp(r_dict[i].passwd_dig, argv[1])) {
 			printf("%s\n", r_dict[i].passwd);
