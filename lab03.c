@@ -121,7 +121,7 @@ int main(int argc, char **argv)
 
 	fp = fopen(fpath, "r");
 	if (fp == NULL) {
-		printf("%s open error\n", fpath);
+		printf("dictionary not found\n", fpath);
 		exit(-1);
 	}
 
