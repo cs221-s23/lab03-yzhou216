@@ -24,7 +24,7 @@ void sha256(char *dest, char *src)
 	memset(dig_bin, 0, DIG_BIN_LEN);
 
 	/* zero out the string version of the hash digest */
-	memset(dest, 0, DIG_STR_LEN);
+	memset(dest, 0, DIG_STR_LEN + 1);
 
 	/* compute the binary hash digest */
 	__sha256_init_ctx(&ctx);
